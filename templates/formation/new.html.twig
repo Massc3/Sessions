@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une formation{% endblock %}
+
+{% block body %}
+
+{% if edit %}
+<h1>Editer une session</h1>
+{% else %}
+<h1>Ajouter une session</h1>
+{% endif %}
+
+<h1>Ajouter une formation</h1>
+
+{{ form_start(formAddFormation) }}
+    <div class="row">
+        <div class="col-sm">
+        {{ form_row(formAddFormation.nomFormation) }}
+        </div>
+    </div>
+
+{{ form_end(formAddFormation) }}
+{# {{ form(formAddFormation) }} #}
+
+{% endblock %}

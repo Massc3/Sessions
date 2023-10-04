@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des formations!{% endblock %}
+
+{% block body %}
+<h1>Liste des formations!</h1>
+
+<a href="{{path('add_formation')}}">Ajouter une formation</a><br>
+
+{% for formation in formations %}
+    {# {{...}} correspond a l'echo en symfony #}
+    {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans formation.php #}
+    <a href="{{ path('afficherDetail_formation', {'id': formation.id}) }}">{{ formation }}</a>     ({{ formation.nomFormation}})
+    <a href=" {{ path('edit_formation', {'id' : formation.id}) }}">Edit</a><br>
+    <a href=" {{ path('delete_formation', {'id' :formation.id}) }}">Supp</a><br>
+{% endfor %}
+{% endblock %}

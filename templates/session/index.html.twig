@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des sessions!{% endblock %}
+
+{% block body %}
+<h1>Liste des sessions!</h1>
+
+<a href="{{path('add_session')}}">Ajouter une session</a><br>
+
+{% for session in sessions %}
+    {# {{...}} correspond a l'echo en symfony #}
+    {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans session.php #}
+    <a href="{{ path('afficherDetail_session', {'id': session.id}) }}">{{ session }}</a>  
+    <a href=" {{ path('edit_session', {'id' : session.id}) }}">Edit</a><br>
+    <a href=" {{ path('delete_session', {'id' :session.id}) }}">Supp</a><br>
+{% endfor %}
+{% endblock %}

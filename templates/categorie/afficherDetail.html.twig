@@ -1,0 +1,13 @@
+{% block title %}Detail d'une categorie{% endblock %}
+
+{% block body %}
+<h1>Detail d'une categorie</h1>
+
+<h2>{{ categorie }}</h2>
+<p>
+  {{categorie.getNomCategorie}} <br>
+  {# Categorie : <a href=" {{path('afficherDetail_categorie', {'id' : categorie.categorie.id })}}">{{categorie.categorie}} </a><br> #}
+
+</p>
+   
+{% endblock %}

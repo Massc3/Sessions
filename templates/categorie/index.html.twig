@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des  categories!{% endblock %}
+
+{% block body %}
+<h1>Liste des  categories!</h1>
+
+<a href="{{path('add_categorie')}}">Ajouter une categorie</a><br>
+
+{% for categorie in categories %}
+    {# {{...}} correspond a l'echo en symfony #}
+    {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans categorie.php #}
+    <a href="{{ path('afficherDetail_categorie', {'id': categorie.id}) }}">{{ categorie }}</a>     ({{ categorie.nomCategorie}})
+    <a href=" {{ path('edit_categorie', {'id' : categorie.id}) }}">Edit</a><br>
+    <a href=" {{ path('delete_categorie', {'id' :categorie.id}) }}">Supp</a><br>
+{% endfor %}
+{% endblock %}

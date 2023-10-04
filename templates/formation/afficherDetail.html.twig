@@ -1,0 +1,13 @@
+{% block title %}Detail d'une formation{% endblock %}
+
+{% block body %}
+<h1>Detail d'une formation</h1>
+
+<h2>{{ formation }}</h2>
+<p>
+  {{formation.getNomFormation}} <br>
+  {# formation : <a href=" {{path('afficherDetail_formation', {'id' : formation.formation.id })}}">{{formation.formation}} </a><br> #}
+
+</p>
+   
+{% endblock %}
