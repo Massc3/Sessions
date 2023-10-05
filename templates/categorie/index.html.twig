@@ -5,13 +5,18 @@
 {% block body %}
 <h1>Liste des  categories!</h1>
 
-<a href="{{path('add_categorie')}}">Ajouter une categorie</a><br>
 
 {% for categorie in categories %}
-    {# {{...}} correspond a l'echo en symfony #}
-    {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans categorie.php #}
-    <a href="{{ path('afficherDetail_categorie', {'id': categorie.id}) }}">{{ categorie }}</a>     ({{ categorie.nomCategorie}})
-    <a href=" {{ path('edit_categorie', {'id' : categorie.id}) }}">Edit</a><br>
-    <a href=" {{ path('delete_categorie', {'id' :categorie.id}) }}">Supp</a><br>
+{# {{...}} correspond a l'echo en symfony #}
+{# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans categorie.php #}
+
+<a href="{{ path('afficherDetail_categorie', {'id': categorie.id}) }}">{{ categorie }}</a>     ({{ categorie.nomCategorie}})
+<a href=" {{ path('edit_categorie', {'id' : categorie.id}) }}" type="button" class="btn btn-warning">Edit</a><br>
+<a href=" {{ path('delete_categorie', {'id' :categorie.id}) }}" type="button" class="btn btn-danger">Supp</a><br>
+
 {% endfor %}
+
+<a href="{{path('add_categorie')}}" type="button" class="btn btn-success">Ajouter une categorie</a><br>
+
+
 {% endblock %}

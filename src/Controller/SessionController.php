@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Session;
 use App\Entity\Formation;
 use App\Form\SessionType;
+use App\Repository\FormationRepository;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,9 +41,9 @@ class SessionController extends AbstractController
     //         'formAddsession' => $form,
     //     ]);
     // }
-    #[Route('/session/new', name: 'add_session')]
+    #[Route('/{formation_id}/session/new', name: 'add_session')]
     #[Route('/session/{id}/edit', name: 'edit_session')]
-    public function new_edit(Session $session = null, Request $request, EntityManagerInterface $entityManager): Response
+    public function new_edit(Session $session = null, $formation_id, Request $request, EntityManagerInterface $entityManager, FormationRepository $formationRepository): Response
     {
 
         if (!$session) {
@@ -54,16 +55,22 @@ class SessionController extends AbstractController
         $form = $this->createForm(SessionType::class, $session);
         // on prend en charge la requete demandé
         $form->handleRequest($request);
+
+        $formation = $formationRepository->find($formation_id);
+
         // si le formulaire est rempli et qu'il est valide
         if ($form->isSubmitted() && $form->isValid()) {
             // on recupere les données du formaulaire 
             $session = $form->getData();
+
+            $session->setFormation($formation);
+            // dd($session);
             // equivalence du prepare en PDO, on prepare l'object qui va etre en base de données
             $entityManager->persist($session);
             // equivalence du execute en PDO
             $entityManager->flush();
             // on fait une redirection vers notre liste session 
-            return $this->redirectToRoute('app_session');
+            return $this->redirectToRoute('afficherDetail_formation', ['id' => $formation_id]);
         }
         return $this->render('session/new.html.twig', [
             'formAddSession' => $form,

@@ -4,10 +4,30 @@
 <h1>Detail d'une formation</h1>
 
 <h2>{{ formation }}</h2>
-<p>
-  {{formation.getNomFormation}} <br>
-  {# formation : <a href=" {{path('afficherDetail_formation', {'id' : formation.formation.id })}}">{{formation.formation}} </a><br> #}
 
+
+{# {{ dump(formation) }} #}
+
+<p>
+  Nom de formation : {{formation.nomFormation}}  <br>
 </p>
+
+
+
+
+{% for session in formation.sessions %}
+<a href="{{ path('afficherDetail_session', {'id' : session.id})}}"></a>
+<p>Session de la formation : <br>
+
+{{ session.titre}} : <br>
+Date debut : {{session.dateDebut|date("m/d/Y")}} Date de fin : {{session.dateFin|date("m/d/Y")}}
+{% for programme in session.programmes %}
+{# {{ dump(programme.module.nomModule) }} #}
+{% endfor %}
+  
+</p>
+<a href="{{path('add_session', {'formation_id': formation.id})}}" type="button" class="btn btn-success">Ajouter une session</a><br>
+
+{% endfor %}
    
 {% endblock %}

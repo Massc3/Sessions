@@ -3,11 +3,6 @@
 {% block body %}
 <h1>Detail d'une session</h1>
 
-<h2>{{ session }}</h2>
-<p>
-  {{session.getTitre}} <br>
-  {# session : <a href=" {{path('afficherDetail_session', {'id' : session.session.id })}}">{{session.session}} </a><br> #}
-
-</p>
-   
+<h2>{{ session.titre }}</h2>
+    
 {% endblock %}

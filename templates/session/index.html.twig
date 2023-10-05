@@ -5,13 +5,35 @@
 {% block body %}
 <h1>Liste des sessions!</h1>
 
-<a href="{{path('add_session')}}">Ajouter une session</a><br>
+{# <a href="{{path('add_session')}}">Ajouter une session</a><br> #}
 
-{% for session in sessions %}
-    {# {{...}} correspond a l'echo en symfony #}
-    {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans session.php #}
-    <a href="{{ path('afficherDetail_session', {'id': session.id}) }}">{{ session }}</a>  
-    <a href=" {{ path('edit_session', {'id' : session.id}) }}">Edit</a><br>
-    <a href=" {{ path('delete_session', {'id' :session.id}) }}">Supp</a><br>
-{% endfor %}
+<table class="table table-hover table-responsive">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nom</th>
+            <th>Editer</th>
+            <th>Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for session in sessions %}
+        <tr>
+            <td>
+                <a href="{{ path('afficherDetail_session', {'id': session.id}) }}">{{ session }}</a> 
+            </td>
+            <td>
+                <a href=" {{ path('edit_session', {'id' : session.id}) }}" class="btn btn-warning">Edit</a>
+            </td>
+            <td>
+                <a href=" {{ path('delete_session', {'id' :session.id}) }}" class="btn btn-danger">Supp</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+    
+ 
+    
+
 {% endblock %}

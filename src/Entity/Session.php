@@ -25,7 +25,7 @@ class Session
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateFin = null;
 
-    #[ORM\OneToMany(mappedBy: 'sessions', targetEntity: Programme::class)]
+    #[ORM\OneToMany(mappedBy: 'session', targetEntity: Programme::class, cascade: ['persist'])]
     private Collection $programmes;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
