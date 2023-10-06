@@ -12,17 +12,15 @@
   Nom de formation : {{formation.nomFormation}}  <br>
 </p>
 
-
-
-
 {% for session in formation.sessions %}
-<a href="{{ path('afficherDetail_session', {'id' : session.id})}}"></a>
-<p>Session de la formation : <br>
+{# <a href="{{ path('afficherDetail_session', {'id' : session.id})}}"></a> #}
 
-{{ session.titre}} : <br>
+<p>Session de la formation : {{ session.titre}}  <br>
+
 Date debut : {{session.dateDebut|date("m/d/Y")}} Date de fin : {{session.dateFin|date("m/d/Y")}}
+
 {% for programme in session.programmes %}
-{# {{ dump(programme.module.nomModule) }} #}
+{# {{ dump(programme.m odule.nomModule) }} #}
 {% endfor %}
   
 </p>

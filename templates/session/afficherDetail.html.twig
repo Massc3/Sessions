@@ -1,8 +1,120 @@
+{% extends 'base.html.twig' %}
+
 {% block title %}Detail d'une session{% endblock %}
 
 {% block body %}
-<h1>Detail d'une session</h1>
+  <h1 >Detail d'une session</h1>
 
-<h2>{{ session.titre }}</h2>
+  <h2>{{ session.titre }}</h2>
+
+  <table class="table table-hover table-responsive">
+    <thead>
+      <tr class="text-center">
+        <th colspan="3" class="fs-2">Formation</th>
+      </tr>
+      <tr>
+        <th>nom de la formation</th>
+        <th>Date debut</th>
+        <th>Date de fin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          {{ session.formation.nomFormation}}
+        </td>
+        <td>
+        {{session.dateDebut|date("m/d/Y")}} 
+        </td>
+        <td>
+          {{session.dateFin|date("m/d/Y")}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <table class="table table-hover table-responsive">
+    <thead>
+      <tr class="text-center">
+        <th colspan="3" class="fs-2">Cours</th>
+      </tr>
+      <tr>
+        <th>Nom du module</th>
+        <th>nombre de jour</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for programme in session.programmes %}
+      {# {{ dump(programme.module.nomModule) }} #}
+      <td>{{ programme.module.nomModule }}</td> 
+      <td>{{ programme.nombreJour }}</td>
+      
+      {% endfor %} 
     
+    </tbody>
+
+  </table> 
+
+
+  <table class="table table-hover table-responsive">
+    <thead>
+      <tr class="text-center">
+        <th colspan="3" class="fs-2">Stagiaires inscrits</th>
+      </tr>
+      <tr>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Inscrit</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for stagiaire in session.stagiaires %}
+        <tr>
+            <td>
+                <a href="{{ path('afficherDetail_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.nom }}</a> 
+            </td>
+            <td>
+                <a href="{{ path('afficherDetail_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.prenom }}</a> 
+            </td>
+            <td>
+                <a href=" {{ path('delete_stagiaire', {'id' :stagiaire.id}) }}" class="btn btn-danger">supprimer</a>
+            </td>
+        </tr> 
+        {% endfor %}
+
+    </tbody>
+  </table>
+
+  <table class="table table-hover table-responsive">
+    <thead>
+      <tr class="text-center">
+        <th colspan="3" class="fs-2">Stagiaires non inscrits</th>
+      </tr>
+      <tr>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Ajouter</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for stagiaire in session.stagiaires %}
+      <tr>
+          <td>
+              <a href="{{ path('afficherDetail_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.nom }}</a> 
+          </td>
+          <td>
+              <a href="{{ path('afficherDetail_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.prenom }}</a> 
+          </td>
+          <td>
+              <a href=" {{ path('add_stagiaire', {'id' :stagiaire.id}) }}" class="btn btn-danger">Ajout</a>
+          </td>
+      </tr> 
+      {% endfor %}
+
+  </tbody>
+  </table>
+      
+
 {% endblock %}

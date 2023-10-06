@@ -48,8 +48,7 @@ class CategorieController extends AbstractController
             $categorie = new Categorie();
         }
 
-        // just set up a fresh $task object (remove the example data)
-        $categorie = new Categorie();
+
         // on creer le formulaire a partir de categorieType
         $form = $this->createForm(CategorieType::class, $categorie);
         // on prend en charge la requete demandé

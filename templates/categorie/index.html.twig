@@ -5,18 +5,37 @@
 {% block body %}
 <h1>Liste des  categories!</h1>
 
+<table class="table table-hover table-responsive">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nom</th>
+            <th>Editer</th>
+            <th>Supprimer</th>
+        </tr>
+    </thead>
 
-{% for categorie in categories %}
-{# {{...}} correspond a l'echo en symfony #}
-{# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans categorie.php #}
+    <tbody>
+        {% for categorie in categories %}
+        <tr>
+            <td>
+                {# {{...}} correspond a l'echo en symfony #}
+                {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans categorie.php #}
+                <a href="{{ path('afficherDetail_categorie', {'id': categorie.id}) }}">{{ categorie }}</a>     ({{ categorie.nomCategorie}})
+            </td>
+            <td>
+                <a href=" {{ path('edit_categorie', {'id' : categorie.id}) }}" class="btn btn-warning">Edit</a>
+            </td>
+            <td>
+                <a href=" {{ path('delete_categorie', {'id' :categorie.id}) }}" class="btn btn-danger">Supp</a>
+            </td>
+        </tr>          
+            
+            {% endfor %}
+        
+    </tbody>
+</table>
 
-<a href="{{ path('afficherDetail_categorie', {'id': categorie.id}) }}">{{ categorie }}</a>     ({{ categorie.nomCategorie}})
-<a href=" {{ path('edit_categorie', {'id' : categorie.id}) }}" type="button" class="btn btn-warning">Edit</a><br>
-<a href=" {{ path('delete_categorie', {'id' :categorie.id}) }}" type="button" class="btn btn-danger">Supp</a><br>
-
-{% endfor %}
-
-<a href="{{path('add_categorie')}}" type="button" class="btn btn-success">Ajouter une categorie</a><br>
+<a href="{{path('add_categorie')}}" class="btn btn-success">Ajouter une categorie</a>
 
 
 {% endblock %}

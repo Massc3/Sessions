@@ -53,11 +53,7 @@ class SessionType extends AbstractType
                 'by_reference' => false, //il est obligatoire car Session n'a pas de setProgramme mais c'est Programme qui contient setSession
                 // c'est Programme qui propriétaire de la relation, pour eviter un mapping false on est obliger de rajouter en byReference
             ])
-            // ->add('stagiaires', TextType::class, [
-            //     'attr' => [
-            //         'class' => 'form-control'
-            //     ]
-            // ])
+
             ->add('ajouter', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-sucess'

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail d'un stagiaire{% endblock %}
+
+{% block body %}
+<h1>Detail d'un stagiaire</h1>
+
+<h2>{{ stagiaire }}</h2>
+<p>
+  {{stagiaire.getNom}} <br>
+  {# stagiaire : <a href=" {{path('afficherDetail_stagiaire', {'id' : stagiaire.stagiaire.id })}}">{{stagiaire.stagiaire}} </a><br> #}
+
+</p>
+   
+{% endblock %}

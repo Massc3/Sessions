@@ -5,16 +5,35 @@
 {% block body %}
 <h1>Liste des formations!</h1>
 
-
-{% for formation in formations %}
-{# {{...}} correspond a l'echo en symfony #}
-{# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans formation.php #}
-<a href="{{ path('afficherDetail_formation', {'id': formation.id}) }}">{{ formation }}</a>  
-<a href=" {{ path('edit_formation', {'id' : formation.id}) }}" type="button" class="btn btn-warning">Edit</a><br>
-<a href=" {{ path('delete_formation', {'id' :formation.id}) }}" type="button" class="btn btn-danger">Supp</a><br>
-{% endfor %}
-
-
-<a href="{{path('add_formation')}}" type="button" class="btn btn-success">Ajouter une formation</a><br>
+<table class="table table-hover table-responsive">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nom</th>
+            <th>Editer</th>
+            <th>Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for formation in formations %}
+        <tr>
+            <td>
+                {# {{...}} correspond a l'echo en symfony #}
+                {# .raisonSociale va appeler le Getter de raison social que l'on retrouve dans formation.php #}
+                <a href="{{ path('afficherDetail_formation', {'id': formation.id}) }}">{{ formation }}</a>
+            </td>
+            <td>
+                <a href=" {{ path('edit_formation', {'id' : formation.id}) }}" type="button" class="btn btn-warning">Edit</a>
+            </td>
+            <td>
+                <a href=" {{ path('delete_formation', {'id' :formation.id}) }}" type="button" class="btn btn-danger">Supp</a>
+            </td>
+        </tr>
+        
+        {% endfor %}
+        
+    </tbody>
+    
+</table>
+    <a href="{{path('add_formation')}}" type="button" class="btn btn-success">Ajouter une formation</a><br>
 
 {% endblock %}
