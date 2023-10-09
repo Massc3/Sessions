@@ -78,7 +78,7 @@
                 <a href="{{ path('afficherDetail_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.prenom }}</a> 
             </td>
             <td>
-                <a href=" {{ path('delete_stagiaire', {'id' :stagiaire.id}) }}" class="btn btn-danger">supprimer</a>
+                <a href=" {{ path('remove_session', {'id' : session.id, 'stagiaire_id' : stagiaire.id}) }}" class="btn btn-danger">supprimer</a>
             </td>
         </tr> 
         {% endfor %}
@@ -99,7 +99,7 @@
     </thead>
     <tbody>
 
-      {% for stagiaire in session.stagiaires %}
+      {% for stagiaire in stagiaireNotSession %}
       <tr>
           <td>
               <a href="{{ path('afficherDetail_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.nom }}</a> 
@@ -108,7 +108,7 @@
               <a href="{{ path('afficherDetail_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.prenom }}</a> 
           </td>
           <td>
-              <a href=" {{ path('add_stagiaire', {'id' :stagiaire.id}) }}" class="btn btn-danger">Ajout</a>
+              <a href=" {{ path('add_stagiaireInSession', {'id' : session.id, 'stagiaire_id' :  stagiaire.id}) }}" class="btn btn-danger">Ajout</a>
           </td>
       </tr> 
       {% endfor %}

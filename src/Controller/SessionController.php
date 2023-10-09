@@ -6,8 +6,9 @@ namespace App\Controller;
 use App\Entity\Session;
 use App\Entity\Formation;
 use App\Form\SessionType;
-use App\Repository\FormationRepository;
 use App\Repository\SessionRepository;
+use App\Repository\FormationRepository;
+use App\Repository\StagiaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -79,23 +80,60 @@ class SessionController extends AbstractController
     }
 
 
-    #[Route('/entreprise/{id}/delete', name: 'delete_session')]
+    #[Route('/session/{id}/delete', name: 'delete_session')]
     public function delete(Session $session, EntityManagerInterface $entityManager)
 
     {
         $entityManager->remove($session);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_entreprise');
+        return $this->redirectToRoute('app_session');
     }
 
 
     #[Route('/session/{id}', name: 'afficherDetail_session')]
-    public function afficherDetail(Session $session): Response
+    public function afficherDetail(Session $session, SessionRepository $sessionRepository): Response
     {
+
+        $stagiaireNotSession = $sessionRepository->findByStagiairesNotInSession($session->getId());
+
         return $this->render('session/afficherDetail.html.twig', [
             // on fais passer la variable session a laquelle on lui donne la valeur session
-            'session' => $session
+            'session' => $session,
+            'stagiaireNotSession' => $stagiaireNotSession
         ]);
+    }
+
+    #[Route('/{stagiaire_id}/session/{id}', name: 'add_stagiaireInSession')]
+    public function addStagiaireToSession(StagiaireRepository $stagiaireRepository, EntityManagerInterface $entityManager, Session $session, $stagiaire_id)
+    {
+        $stagiaire = $stagiaireRepository->find($stagiaire_id);
+
+        if ($stagiaire) {
+            // Ajoutez le stagiaire à la session
+            $session->addStagiaire($stagiaire);
+            // Enregistrez les modifications dans la base de données
+            $entityManager->persist($session); // Prépare l'insertion en base de données
+            $entityManager->flush(); // Exécute l'insertion en base de données
+            // Redirigez l'utilisateur vers la page actuelle (ou une autre page si nécessaire)
+            return $this->redirectToRoute('afficherDetail_session', ['id' => $session->getId()]);
+        }
+    }
+
+
+    #[Route('/remove/{stagiaire_id}/session/{id}', name: 'remove_session')]
+    public function removeStagiaireToSession(StagiaireRepository $stagiaireRepository, EntityManagerInterface $entityManager, Session $session, Request $request, $stagiaire_id)
+    {
+        $stagiaire = $stagiaireRepository->find($stagiaire_id);
+        if ($stagiaire) {
+            // Retirer le stagiaire à la session
+            $session->removeStagiaire($stagiaire);
+            // Enregistrez les modifications dans la base de données
+            $entityManager->persist($session); // Prépare l'insertion en base de données
+            // dd($session->getId());
+            $entityManager->flush(); // Exécute l'insertion en base de données
+            // Redirigez l'utilisateur vers la page actuelle (ou une autre page si nécessaire)
+            return $this->redirectToRoute('afficherDetail_session', ['id' => $session->getId()]);
+        }
     }
 }
