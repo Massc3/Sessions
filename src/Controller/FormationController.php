@@ -16,7 +16,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FormationController extends AbstractController
 {
-    #[Route('/formation', name: 'app_formation')]
+    // #[Route('/admin/formation', name: 'app_formation')]
+    #[Route('/admin/formation', name: 'app_formation')]
     public function index(FormationRepository $formationRepository): Response
     {
         // $formations = $employRepository->findAll();

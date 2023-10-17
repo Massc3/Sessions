@@ -42,8 +42,8 @@ class SessionController extends AbstractController
     //         'formAddsession' => $form,
     //     ]);
     // }
-    #[Route('/{formation_id}/session/new', name: 'add_session')]
-    #[Route('/session/{id}/edit', name: 'edit_session')]
+    #[Route('/admin/{formation_id}/session/new', name: 'add_session')]
+    #[Route('/admin/session/{id}/edit', name: 'edit_session')]
     public function new_edit(Session $session = null, $formation_id, Request $request, EntityManagerInterface $entityManager, FormationRepository $formationRepository): Response
     {
 
@@ -80,7 +80,7 @@ class SessionController extends AbstractController
     }
 
 
-    #[Route('/session/{id}/delete', name: 'delete_session')]
+    #[Route('/admin/session/{id}/delete', name: 'delete_session')]
     public function delete(Session $session, EntityManagerInterface $entityManager)
 
     {
@@ -104,7 +104,7 @@ class SessionController extends AbstractController
         ]);
     }
 
-    #[Route('/{stagiaire_id}/session/{id}', name: 'add_stagiaireInSession')]
+    #[Route('/admin/{stagiaire_id}/session/{id}', name: 'add_stagiaireInSession')]
     public function addStagiaireToSession(StagiaireRepository $stagiaireRepository, EntityManagerInterface $entityManager, Session $session, $stagiaire_id)
     {
         $stagiaire = $stagiaireRepository->find($stagiaire_id);
@@ -121,7 +121,7 @@ class SessionController extends AbstractController
     }
 
 
-    #[Route('/remove/{stagiaire_id}/session/{id}', name: 'remove_session')]
+    #[Route('/admin/remove/{stagiaire_id}/session/{id}', name: 'remove_session')]
     public function removeStagiaireToSession(StagiaireRepository $stagiaireRepository, EntityManagerInterface $entityManager, Session $session, Request $request, $stagiaire_id)
     {
         $stagiaire = $stagiaireRepository->find($stagiaire_id);

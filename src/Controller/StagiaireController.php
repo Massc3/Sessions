@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class StagiaireController extends AbstractController
 {
-    #[Route('/stagiaire', name: 'app_stagiaire')]
+    #[Route('/admin/stagiaire', name: 'app_stagiaire')]
     public function index(StagiaireRepository $stagiaireRepository): Response
     {
         // $stagiaire = $employRepository->findAll();
